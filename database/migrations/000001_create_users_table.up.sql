@@ -1,0 +1,4 @@
+CREATE TABLE IF NO EXISTS users(
+    user_id AUTO_INCREMENT PRIMARY KEY,
+
+);
