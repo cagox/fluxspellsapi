@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS schools(
+    school_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    school_name VARCHAR(90) CHARACTER SET utf8mb4 NOT NULL UNIQUE,
+    school_description TEXT NOT NULL,
+    summary TEXT NOT NULL
+);
