@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/cagox/fluxspellsapi/app"
 	"github.com/cagox/fluxspellsapi/app/database"
 	"github.com/cagox/fluxspellsapi/app/models"
 	"os"
@@ -11,19 +10,6 @@ import (
 )
 
 func main() {
-	app.StartLogging()
-	defer app.StopLogging()
-	database.OpenDatabase()
-	defer database.CloseDatabase()
-
-	fmt.Println("Hello World!")
-	fmt.Println("Welcome to " + app.Config.SiteName)
-
-	login()
-
-}
-
-func login() {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("Email: ")
 	email, err := reader.ReadString('\n')
@@ -40,14 +26,11 @@ func login() {
 	password = strings.TrimSuffix(password, "\n")
 	email = strings.TrimSuffix(email, "\n")
 
-	user := models.GetUserByEmail(email)
+	database.OpenDatabase()
+	defer database.CloseDatabase()
 
-	authenticated := user.AuthenticateUser(password)
+	firstUser := models.CreateAndInsertUser(email, password, true)
 
-	if authenticated {
-		fmt.Println(user.Email + " logged in!")
-	} else {
-		fmt.Println("Wrong Password!")
-	}
+	fmt.Println("User "+firstUser.Email+" created with ID ", firstUser.ID)
 
 }
