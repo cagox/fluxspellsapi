@@ -64,7 +64,7 @@ func GetUserByEmail(email string) *User {
 
 	sqlStatement := "SELECT user_id, email, passwordhash, isadmin FROM users where email=?"
 
-	row := app.Config.Database.QueryRow(sqlStatement, email)
+	row, err := app.Config.Database.QueryRow(sqlStatement, email)
 	switch err := row.Scan(&user.ID, &user.Email, &user.PasswordHash, &user.IsAdmin); err {
 	case sql.ErrNoRows:
 		fmt.Println("User " + email + " does not exist.")
