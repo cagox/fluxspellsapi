@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS types (
-    type_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    type_name VARCHAR(90) CHARACTER SET utf8mb4 NOT NULL UNIQUE,
-    type_description TEXT NOT NULL,
-    summary TEXT NOT NULL
-);
