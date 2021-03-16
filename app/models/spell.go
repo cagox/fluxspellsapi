@@ -6,8 +6,8 @@ import (
 
 type Spell struct {
 	ID            int    `json:"spell_id"`
-	Name          string `json:"spellname"`
-	Description   string `json:"spelldescription"`
+	Name          string `json:"name"`
+	Description   string `json:"description"`
 	Summary       string `json:"summary"`
 	Cost          string `json:"cost"`
 	Difficulty    string `json:"difficulty"`
