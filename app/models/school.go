@@ -5,9 +5,9 @@ import (
 )
 
 type School struct {
-	ID          int    `json:"school_id"`
-	Name        string `json:"school_name"`
-	Description string `json:"school_description"`
+	ID          int    `json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
 	Summary     string `json:"summary"`
 	//Spells     Many-to-Many will be mapped as a function later.
 }
