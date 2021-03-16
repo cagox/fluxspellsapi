@@ -6,7 +6,7 @@ import (
 )
 
 type School struct {
-	ID          int    `json:"id"`
+	ID          int    `json:"school_id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	Summary     string `json:"summary"`
