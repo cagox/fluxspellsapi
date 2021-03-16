@@ -6,8 +6,8 @@ import (
 
 type Type struct {
 	ID          int    `json:"type_id"`
-	Name        string `json:"type_name"`
-	Description string `json:"type_description"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
 	Summary     string `json:"summary"`
 	//Spells     Many-to-Many will be mapped as a function later.
 }
