@@ -41,7 +41,7 @@ func GetTypeByID(id int) *Type {
 func GetTypeByName(name string) *Type {
 	spellType := new(Type)
 
-	sqlStatement := "SELECT type_id, name, description, summary FROM types where name=?"
+	sqlStatement := `SELECT type_id, name, description, summary FROM types where name=?`
 
 	row := app.Config.Database.QueryRow(sqlStatement, name)
 
