@@ -2,6 +2,7 @@ package models
 
 import (
 	"encoding/gob"
+	"github.com/cagox/fluxspellsapi/app"
 )
 
 type TypeLink struct {
@@ -17,7 +18,7 @@ type SchoolLink struct {
 }
 
 func InsertTypeLink(spellID int, typeID int) *TypeLink {
-	newLink = &TypeLink{SpellID: spellID, TypeID: typeID}
+	newLink := &TypeLink{SpellID: spellID, TypeID: typeID}
 
 	sqlString := `INSERT INTO type_links(type_id, spell_id) VALUES(?,?)`
 	res, err := app.Config.Database.Exec(sqlString, typeID, spellID)
@@ -25,7 +26,7 @@ func InsertTypeLink(spellID int, typeID int) *TypeLink {
 		panic(err) //TODO: Proper error checking.
 	}
 	id, err := res.LastInsertId()
-		if err != nil {
+	if err != nil {
 		panic(err) //TODO: Proper error checking.
 	}
 
@@ -34,7 +35,7 @@ func InsertTypeLink(spellID int, typeID int) *TypeLink {
 }
 
 func InsertSchoolLink(spellID int, schoolID int) *SchoolLink {
-	newLink = &SchoolLink{SpellID: spellID, SchoolID: schoolID}
+	newLink := &SchoolLink{SpellID: spellID, SchoolID: schoolID}
 
 	sqlString := `INSERT INTO school_links(school_id, spell_id) VALUES(?,?)`
 	res, err := app.Config.Database.Exec(sqlString, schoolID, spellID)
@@ -42,7 +43,7 @@ func InsertSchoolLink(spellID int, schoolID int) *SchoolLink {
 		panic(err) //TODO: Proper error checking.
 	}
 	id, err := res.LastInsertId()
-		if err != nil {
+	if err != nil {
 		panic(err) //TODO: Proper error checking.
 	}
 
@@ -50,10 +51,7 @@ func InsertSchoolLink(spellID int, schoolID int) *SchoolLink {
 	return newLink
 }
 
-
 //TODO: Add the ability to drop links.
-
-
 
 func init() {
 	gob.Register(TypeLink{})

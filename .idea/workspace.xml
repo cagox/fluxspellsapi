@@ -2,33 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="35674d27-df14-4d62-a97d-0f710b0a51bc" name="Default Changelist" comment="Successfully added a user to the database and retrieved it.&#10;&#10;cmd/firstUser successfully added an admin user to the database.&#10;I was able to retrieve the user from the database and authenticate&#10;the password against the password hash on the user.">
-      <change afterPath="$PROJECT_DIR$/app/app.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/config.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/database/database.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/logger.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/firstuser/firstuser.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crypto/crypto.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/crypto/crypto.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crypto/doc.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/crypto/doc.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/000001_create_users_table.down.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/migrations/000001_create_users_table.down.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/000001_create_users_table.up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/migrations/000001_create_users_table.up.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/000002_create_spells_table.down.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/migrations/000002_create_spells_table.down.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/000002_create_spells_table.up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/migrations/000002_create_spells_table.up.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/000003_create_schools_table.down.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/migrations/000003_create_schools_table.down.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/000003_create_schools_table.up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/migrations/000003_create_schools_table.up.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/000004_create_types_table.down.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/migrations/000004_create_types_table.down.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/000004_create_types_table.up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/migrations/000004_create_types_table.up.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/000005_create_typelinks_table.down.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/migrations/000005_create_typelinks_table.down.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/000005_create_typelinks_table.up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/migrations/000005_create_typelinks_table.up.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/000006_create_schoollinks_table.down.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/migrations/000006_create_schoollinks_table.down.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/000006_create_schoollinks_table.up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/migrations/000006_create_schoollinks_table.up.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/links.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/links.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/school.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/school.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/spell.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/spell.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/spelltype.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/spelltype.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/links.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/links.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/school.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/school.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/spell.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/spell.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/spelltype.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/spelltype.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/util/class_string.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/util/class_string.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

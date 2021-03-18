@@ -1,10 +1,6 @@
 package util
 
-import (
-	"fmt"
-)
-
-/* 
+/*
  * ClassString returns an empty string if classNames is empty.
  * Otherwise it returns a string in the form of `class="one or more classes"`
  */
