@@ -3,10 +3,10 @@ package models
 import (
 	"database/sql"
 	"encoding/gob"
+	"encoding/json"
 	"fmt"
 	"github.com/cagox/fluxspellsapi/app"
 	"github.com/cagox/fluxspellsapi/app/util"
-	"log"
 )
 
 type School struct {
@@ -64,21 +64,20 @@ func (school School) Spells() []SpellSummary {
 	spells := make([]SpellSummary, 0)
 
 	// First we create the query statement.
-	sqlStatement := "SELECT ? FROM spells INNER JOIN school_links ON spells.spell_id = school_links.spell_id WHERE school_links.school_id=?"
-	fields := "spells.spell_id, spells.name, spells.summary"
+	sqlStatement := `SELECT spells.spell_id, spells.name, spells.summary FROM spells INNER JOIN school_links ON spells.spell_id = school_links.spell_id WHERE school_links.school_id=?`
 
 	//We execute the query.
-	rows, err := app.Config.Database.Query(sqlStatement, fields, school.ID)
+	rows, err := app.Config.Database.Query(sqlStatement, school.ID)
 	if err != nil {
 		//TODO: Figure out proper error checking and logging.
-		log.Fatal(err)
+		panic(err)
 	}
 	defer rows.Close()
 
 	for rows.Next() {
 		nextSpell := SpellSummary{}
 		if err := rows.Scan(&nextSpell.ID, &nextSpell.Name, &nextSpell.Summary); err != nil {
-			log.Fatal(err)
+			panic(err)
 			//TODO: Figure out proper error checking and logging.
 		}
 		spells = append(spells, nextSpell)
@@ -122,4 +121,11 @@ func init() {
 	gob.Register(School{})
 }
 
-//TODO: Much of this code was written away from home, in notepad, without a compiler at hand. Don't assume it works until you actually try it out.
+func (school *School) SpellsToJSON() string {
+	spells := school.Spells()
+	spellsJSON, err := json.Marshal(spells)
+	if err != nil {
+		panic(err)
+	}
+	return string(spellsJSON)
+}

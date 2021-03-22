@@ -1,7 +1,7 @@
 package models
 
 import (
-	"encoding/gob"
+	"encoding/json"
 	"github.com/cagox/fluxspellsapi/app"
 )
 
@@ -52,8 +52,20 @@ func InsertSchoolLink(spellID int, schoolID int) *SchoolLink {
 }
 
 //TODO: Add the ability to drop links.
+func (link *SchoolLink) ToJSON() string {
+	linkJson, err := json.Marshal(link)
+	if err != nil {
+		panic(err)
+	}
 
-func init() {
-	gob.Register(TypeLink{})
-	gob.Register(SchoolLink{})
+	return string(linkJson)
+}
+
+func (link *TypeLink) ToJSON() string {
+	linkJson, err := json.Marshal(link)
+	if err != nil {
+		panic(err)
+	}
+
+	return string(linkJson)
 }

@@ -19,7 +19,24 @@ func main() {
 	fmt.Println("Hello World!")
 	fmt.Println("Welcome to " + app.Config.SiteName)
 
-	login()
+	//login()
+	//testing.Setup() //This has already been done, so I theoretically should not have to do it again.
+
+	testSpell := models.GetSpellByID(1)
+
+	fmt.Println(testSpell.Name + " Spell: " + testSpell.ToJSON())
+	fmt.Println()
+
+	testSchool := models.GetSchoolByID(17)
+
+	fmt.Println("Spells for the School " + testSchool.Name + ": " + testSchool.SpellsToJSON())
+	fmt.Println()
+
+	testType := models.GetTypeByID(21)
+	fmt.Println(testType.Name + " type spells:" + testType.SpellsToJSON())
+
+	testSpell.AddType(21) //Already done, and it works.
+	fmt.Println(testSpell.Name + " has the following types: " + testSpell.TypesToJSON())
 
 }
 
