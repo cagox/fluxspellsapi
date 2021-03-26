@@ -129,3 +129,35 @@ func (school *School) SpellsToJSON() string {
 	}
 	return string(spellsJSON)
 }
+
+func GetSchools() []School {
+	schools := make([]School, 0)
+
+	sqlStatement := `SELECT school_id, name, description, summary FROM schools;`
+
+	rows, err := app.Config.Database.Query(sqlStatement)
+	if err != nil {
+		panic(err) //TODO: build up proper error handling.
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		nextSchool := School{}
+		if err := rows.Scan(&nextSchool.ID, &nextSchool.Name, &nextSchool.Description, &nextSchool.Summary); err != nil {
+			panic(err)
+			//TODO: Figure out proper error checking and logging.
+		}
+		schools = append(schools, nextSchool)
+	}
+
+	return schools
+}
+
+func SchoolsToJSON() []byte {
+	schools := GetSchools()
+	schoolsList, err := json.Marshal(schools)
+	if err != nil {
+		panic(err)
+	}
+	return schoolsList
+}

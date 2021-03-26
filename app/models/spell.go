@@ -115,12 +115,12 @@ func (spell Spell) GetSchools() []School {
 	return schools
 }
 
-func (spell Spell) AddType(typeID int) {
-	InsertTypeLink(spell.ID, typeID)
+func (spell Spell) AddType(typeID int) (*TypeLink, error) {
+	return InsertTypeLink(spell.ID, typeID)
 }
 
-func (spell Spell) AddSchool(schoolID int) {
-	InsertSchoolLink(spell.ID, schoolID)
+func (spell Spell) AddSchool(schoolID int) (*SchoolLink, error) {
+	return InsertSchoolLink(spell.ID, schoolID)
 }
 
 func GetSpellByID(id int) *Spell {

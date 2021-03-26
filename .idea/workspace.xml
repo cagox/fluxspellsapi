@@ -2,18 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="35674d27-df14-4d62-a97d-0f710b0a51bc" name="Default Changelist" comment="Adding JSON functionality&#10;I have started adding JSON functionality where appropriate. At this time I am able to&#10;marshal the important types to JSON so that they can eventually be returned by an API.&#10;I created a set of &quot;setup&quot; functions to add data to the database for playing around&#10;with as well. This will allow me to start the next step, which will be starting to add&#10;error checking that is useful to a web app. After all, we don't want the entire thing&#10;to crash if someone attempts to add a type twice, or asks for something that is not&#10;there.">
-      <change afterPath="$PROJECT_DIR$/app/testing/schoollinks.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/testing/schools.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/testing/setup.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/testing/spells.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/testing/testing.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/testing/typelinks.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/testing/types.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/routes/schools.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/links.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/links.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/school.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/school.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/spell.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/spell.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/spelltype.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/spelltype.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
