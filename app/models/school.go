@@ -121,13 +121,13 @@ func init() {
 	gob.Register(School{})
 }
 
-func (school *School) SpellsToJSON() string {
+func (school *School) SpellsToJSON() []byte {
 	spells := school.Spells()
 	spellsJSON, err := json.Marshal(spells)
 	if err != nil {
 		panic(err)
 	}
-	return string(spellsJSON)
+	return spellsJSON
 }
 
 func GetSchools() []School {
@@ -161,3 +161,15 @@ func SchoolsToJSON() []byte {
 	}
 	return schoolsList
 }
+
+func (school *School) toJSON() []byte {
+	thisSchool, err := json.Marshal()
+	if err != nil {
+		panic(err)
+	}
+	return thisSchool
+}
+
+
+
+
