@@ -162,7 +162,7 @@ func SchoolsToJSON() []byte {
 	return schoolsList
 }
 
-func (school *School) toJSON() []byte {
+func (school *School) ToJSON() []byte {
 	thisSchool, err := json.Marshal()
 	if err != nil {
 		panic(err)
