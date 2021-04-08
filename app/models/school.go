@@ -59,12 +59,12 @@ func GetSchoolByName(name string) *School {
 	//TODO: Implement error checking so that methods consuming the results can react appropriately if the school doesn't exist.
 }
 
-func (school School) Spells() []SpellSummary {
+func (school School) Spells() []Spell {
 
-	spells := make([]SpellSummary, 0)
+	spells := make([]Spell, 0)
 
 	// First we create the query statement.
-	sqlStatement := `SELECT spells.spell_id, spells.name, spells.summary FROM spells INNER JOIN school_links ON spells.spell_id = school_links.spell_id WHERE school_links.school_id=?`
+	sqlStatement := `SELECT spells.spell_id, spells.name, spells.description, spells.summary, spells.cost, spells.difficulty, spells.prerequisites, spells.components, spells.spellrange FROM spells INNER JOIN school_links ON spells.spell_id = school_links.spell_id WHERE school_links.school_id=?`
 
 	//We execute the query.
 	rows, err := app.Config.Database.Query(sqlStatement, school.ID)
@@ -75,11 +75,13 @@ func (school School) Spells() []SpellSummary {
 	defer rows.Close()
 
 	for rows.Next() {
-		nextSpell := SpellSummary{}
-		if err := rows.Scan(&nextSpell.ID, &nextSpell.Name, &nextSpell.Summary); err != nil {
+		nextSpell := Spell{}
+		if err := rows.Scan(&nextSpell.ID, &nextSpell.Name, &nextSpell.Description, &nextSpell.Summary, &nextSpell.Cost, &nextSpell.Difficulty, &nextSpell.Prerequisites, &nextSpell.Components, &nextSpell.Range); err != nil {
 			panic(err)
 			//TODO: Figure out proper error checking and logging.
 		}
+		nextSpell.Types = nextSpell.GetTypes()
+		nextSpell.Schools = nextSpell.GetSchools()
 		spells = append(spells, nextSpell)
 	}
 
@@ -163,13 +165,9 @@ func SchoolsToJSON() []byte {
 }
 
 func (school *School) ToJSON() []byte {
-	thisSchool, err := json.Marshal()
+	thisSchool, err := json.Marshal(school)
 	if err != nil {
 		panic(err)
 	}
 	return thisSchool
 }
-
-
-
-

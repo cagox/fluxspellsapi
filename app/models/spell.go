@@ -142,7 +142,7 @@ func GetSpellByID(id int) *Spell {
 	//TODO: Fix error checking to something more useful for web dev.
 }
 
-func (spell *Spell) ToJSON() string {
+func (spell *Spell) ToJSON() []byte {
 	spell.Schools = spell.GetSchools()
 	spell.Types = spell.GetTypes()
 
@@ -150,7 +150,7 @@ func (spell *Spell) ToJSON() string {
 	if err != nil {
 		panic(err)
 	}
-	return string(spellJSON)
+	return spellJSON
 }
 
 func (spell *Spell) TypesToJSON() string {
@@ -162,11 +162,45 @@ func (spell *Spell) TypesToJSON() string {
 	return string(typesList)
 }
 
-func (spell *Spell) SchoolsToJSON() string {
+func (spell *Spell) SchoolsToJSON() []byte {
 	schools := spell.GetSchools()
 	schoolsList, err := json.Marshal(schools)
 	if err != nil {
 		panic(err)
 	}
-	return string(schoolsList)
+	return schoolsList
+}
+func GetSpells() []Spell {
+	spells := make([]Spell, 0)
+	sqlStatement := `SELECT spell_id, name, description, summary, cost, difficulty, prerequisites, components, spellrange FROM spells`
+
+	rows, err := app.Config.Database.Query(sqlStatement)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		nextSpell := Spell{}
+		if err := rows.Scan(&nextSpell.ID, &nextSpell.Name, &nextSpell.Description, &nextSpell.Summary, &nextSpell.Cost, &nextSpell.Difficulty, &nextSpell.Prerequisites, &nextSpell.Components, &nextSpell.Range); err != nil {
+			panic(err)
+		}
+		nextSpell.Types = nextSpell.GetTypes()
+		nextSpell.Schools = nextSpell.GetSchools()
+		spells = append(spells, nextSpell)
+	}
+
+	return spells
+}
+
+func SpellsToJSON() []byte {
+	spellList := GetSpells()
+
+	listJSON, err := json.Marshal(spellList)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return listJSON
 }

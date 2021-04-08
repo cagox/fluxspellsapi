@@ -5,6 +5,7 @@ import (
 	"github.com/cagox/fluxspellsapi/app/models"
 	"github.com/gorilla/mux"
 	"net/http"
+	"strconv"
 )
 
 func schoolsHandler(w http.ResponseWriter, r *http.Request) {
@@ -18,7 +19,12 @@ func schoolsHandler(w http.ResponseWriter, r *http.Request) {
 
 func schoolHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	school := School.GetSchoolByID(vars['school_id'])
+	id_val, err := strconv.Atoi(vars["school_id"])
+	if err != nil {
+		panic(err)
+	}
+
+	school := models.GetSchoolByID(id_val)
 	
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -27,7 +33,12 @@ func schoolHandler(w http.ResponseWriter, r *http.Request) {
 
 func schoolSpellsHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	school := School.GetSchoolByID(vars['school_id'])
+	id_val, err := strconv.Atoi(vars["school_id"])
+	if err != nil {
+		panic(err)
+	}
+
+	school := models.GetSchoolByID(id_val)
 	
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -38,8 +49,10 @@ func schoolSpellsHandler(w http.ResponseWriter, r *http.Request) {
 
 func init() {
 	app.Config.Router.HandleFunc("/api/schools/", schoolsHandler)
-	app.Conig.Router.HandleFunc("/api/schools/{school_id}", schoolHandler)
-	app.Conig.Router.HandleFunc("/api/schools/{school_id}/spells", schoolSpellHandler)
+	app.Config.Router.HandleFunc("/api/schools", schoolsHandler)
+	app.Config.Router.HandleFunc("/api/schools/{school_id:[0-9]+}", schoolHandler)
+	app.Config.Router.HandleFunc("/api/schools/{school_id:[0-9]+}/spells", schoolSpellsHandler)
+	app.Config.Router.HandleFunc("/api/schools/{school_id:[0-9]+}/spells/", schoolSpellsHandler)
 }
 
 
