@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="35674d27-df14-4d62-a97d-0f710b0a51bc" name="Default Changelist" comment="The first API element is in place.&#10;The route /api/schools/ now returns a list&#10;of schools in JSON format, and the site&#10;is able to consume that.">
-      <change afterPath="$PROJECT_DIR$/app/routes/spells.go" afterDir="false" />
+    <list default="true" id="35674d27-df14-4d62-a97d-0f710b0a51bc" name="Default Changelist" comment="Worked on realigning assumptions.&#10;* I still had code returning string instead of []byte for json. I think I fixed most of that.&#10;* I added in routes to retrieve json related to spells and schools.">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/school.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/school.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/spell.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/spell.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/schools.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/schools.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/spells.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/spells.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +18,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file:///snap/go/7013" />
+  <component name="GOROOT" url="file:///snap/go/7360" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -41,6 +39,7 @@
     <property name="configurable..is.expanded" value="false" />
     <property name="configurable.GoLibrariesConfigurable.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -84,7 +83,8 @@
     <MESSAGE value="Converted to go module&#10;GOPATH development has been deprecated and will no longer work as of&#10;go 1.16. So, I have changed the project to a module. Not only does it&#10;still work at least as well as it did before, but my shell no longer&#10;complains that it can't find anything because of a missing GOPATH." />
     <MESSAGE value="Adding JSON functionality&#10;I have started adding JSON functionality where appropriate. At this time I am able to&#10;marshal the important types to JSON so that they can eventually be returned by an API.&#10;I created a set of &quot;setup&quot; functions to add data to the database for playing around&#10;with as well. This will allow me to start the next step, which will be starting to add&#10;error checking that is useful to a web app. After all, we don't want the entire thing&#10;to crash if someone attempts to add a type twice, or asks for something that is not&#10;there." />
     <MESSAGE value="The first API element is in place.&#10;The route /api/schools/ now returns a list&#10;of schools in JSON format, and the site&#10;is able to consume that." />
-    <option name="LAST_COMMIT_MESSAGE" value="The first API element is in place.&#10;The route /api/schools/ now returns a list&#10;of schools in JSON format, and the site&#10;is able to consume that." />
+    <MESSAGE value="Worked on realigning assumptions.&#10;* I still had code returning string instead of []byte for json. I think I fixed most of that.&#10;* I added in routes to retrieve json related to spells and schools." />
+    <option name="LAST_COMMIT_MESSAGE" value="Worked on realigning assumptions.&#10;* I still had code returning string instead of []byte for json. I think I fixed most of that.&#10;* I added in routes to retrieve json related to spells and schools." />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
