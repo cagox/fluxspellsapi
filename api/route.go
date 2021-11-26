@@ -27,8 +27,9 @@ func SetupRoutes() {
 	app.Config.Router.HandleFunc("/api/schools/{school_id}/spells", schoolSpells).Methods("GET")
 	app.Config.Router.HandleFunc("/api/categories/{category_id}", viewCategory).Methods("GET")
 	app.Config.Router.HandleFunc("/api/categories/{category_id}/spells", categorySpells).Methods("GET")
-	//app.Config.Router.HandleFunc("/api/spells/{id}", viewSpell).Methods("GET")
-
+	app.Config.Router.HandleFunc("/api/spells/{spell_id}", viewSpell).Methods("GET")
+	app.Config.Router.HandleFunc("/api/abilityscores/", listScores).Methods("GET")
+	app.Config.Router.HandleFunc("/api/abilityscores/{ability_score_id}", viewScore).Methods("GET")
 	//Edit things (The U in CRUD)
 	//app.Config.Router.HandleFunc("/api/spells/{id}/edit", editSpell).Methods("GET")
 	//app.Config.Router.HandleFunc("/api/spells/{id}, updateSpell).Methods("PATCH")

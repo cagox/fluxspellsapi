@@ -78,7 +78,7 @@ func GetSchoolByID(id int) *School {
 	case nil:
 		return school
 	default:
-		fmt.Println(`GetSpellByID(id int)`)
+		fmt.Println(`GetSchoolByID(id int)`)
 		panic(err)
 	}
 	return school

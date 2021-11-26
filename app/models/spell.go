@@ -1,23 +1,25 @@
 package models
 
 import (
+	"database/sql"
 	"encoding/gob"
 	"encoding/json"
+	"fmt"
 	"github.com/cagox/fluxspellsapi/app"
 )
 
 type Spell struct {
-	SpellID        int        `json:"spell_id"`
-	Name           string     `json:"name"`
-	Cost           string     `json:"cost"`
-	Difficulty     string     `json:"difficulty"`
-	SpellRange     string     `json:"spellrange"`
-	Prerequisites  string     `json:"prerequisites"`
-	AbilityScoreID int        `json:"ability_score_id"`
-	Summary        string     `json:"summary"`
-	Description    string     `json:"description"`
-	Categories     []Category `json:"categories"`
-	Schools        []School   `json:"schools"`
+	SpellID        int              `json:"spell_id"`
+	Name           string           `json:"name"`
+	Cost           string           `json:"cost"`
+	Difficulty     string           `json:"difficulty"`
+	SpellRange     string           `json:"spellrange"`
+	Prerequisites  string           `json:"prerequisites"`
+	AbilityScoreID int              `json:"ability_score_id"`
+	Summary        string           `json:"summary"`
+	Description    string           `json:"description"`
+	Categories     []CategoryHeader `json:"categories"`
+	Schools        []SchoolHeader   `json:"schools"`
 	/*
 	 * Categories and Schools are not persisted in the spells table in the database.
 	 * They are collected using the GetSchools and GetCategories methods below.
@@ -203,4 +205,36 @@ func GetSpellsByCategoryAsJSON(category_id int) []byte {
 	}
 
 	return spellList
+}
+
+func GetSpellByID(spell_id int) *Spell {
+	spell := new(Spell)
+
+	sqlStatement := `SELECT spell_id, name, cost, difficulty, spellrange, prerequisites, ability_score_id, summary, description FROM spells WHERE spell_id=?`
+
+	row := app.Config.Database.QueryRow(sqlStatement, spell_id)
+
+	switch err := row.Scan(&spell.SpellID, &spell.Name, &spell.Cost, &spell.Difficulty, &spell.SpellRange, &spell.Prerequisites, &spell.AbilityScoreID, &spell.Summary, &spell.Description); err {
+	case sql.ErrNoRows:
+		fmt.Println("Spell ID ", spell_id, " doesn't exist.")
+	case nil:
+		spell.Schools = spell.GetSchools()
+		spell.Categories = spell.GetCategories()
+		return spell
+	default:
+		fmt.Println(`GetSpellByID(id int)`)
+		panic(err)
+	}
+	return spell
+	//TODO: Make error checking better.
+}
+
+func GetSpellAsJSON(spell_id int) []byte {
+	spell := GetSpellByID(spell_id)
+
+	spellJSON, err := json.Marshal(spell)
+	if err != nil {
+		panic(err) //TODO: Make this more useful
+	}
+	return spellJSON
 }

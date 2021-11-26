@@ -65,7 +65,7 @@ func GetCategoryList() []CategorySummary {
 	sqlStatement := `SELECT category_id, name, summary FROM categories;`
 	rows, err := app.Config.Database.Query(sqlStatement)
 	if err != nil {
-		fmt.Println(`Failed at GetSchoolList(): Database.Query`)
+		fmt.Println(`Failed at GetCategoryList(): Database.Query`)
 		panic(err) //TODO: Make this more useful.
 	}
 	defer rows.Close()
@@ -104,11 +104,11 @@ func GetCategoryByID(id int) *Category {
 
 	switch err := row.Scan(&category.CategoryID, &category.Name, &category.Summary, &category.Description); err {
 	case sql.ErrNoRows:
-		fmt.Println("School ID ", id, " doesn't exist.")
+		fmt.Println("Category ID ", id, " doesn't exist.")
 	case nil:
 		return category
 	default:
-		fmt.Println(`GetSpellByID(id int)`)
+		fmt.Println(`GetCategoryByID(id int)`)
 		panic(err)
 	}
 	return category

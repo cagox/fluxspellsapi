@@ -7,21 +7,22 @@ import (
 	"strconv"
 )
 
-func listSpells(w http.ResponseWriter, r *http.Request) {
-	spells := models.GetSpellSummaryListAsJSON()
+func listScores(w http.ResponseWriter, r *http.Request) {
+	scores := models.AbilityScoreListAsJSON()
+
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Write(spells)
+	w.Write(scores)
 }
 
-func viewSpell(w http.ResponseWriter, r *http.Request) {
+func viewScore(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	idVal, err := strconv.Atoi(vars["spell_id"])
+	idVal, err := strconv.Atoi(vars["ability_score_id"])
 	if err != nil {
 		panic(err) //TODO: Make this more useful.
 	}
-	spell := models.GetSpellAsJSON(idVal)
+	ability := models.AbilityScoreAsJSON(idVal)
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Write(spell)
+	w.Write(ability)
 }
