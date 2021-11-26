@@ -37,7 +37,7 @@ func init() {
 	gob.Register(SpellSummary{})
 }
 
-func GetSpellSummaryList() []byte {
+func GetSpellSummaryList() []SpellSummary {
 	spells := make([]SpellSummary, 0)
 
 	sqlStatement := `SELECT spell_id, name, summary FROM spells;`
@@ -58,7 +58,22 @@ func GetSpellSummaryList() []byte {
 		spells = append(spells, nextSpell)
 	}
 
+	if err != nil {
+		panic(err)
+		//TODO: Figure out proper error checking and logging.
+	}
+
+	return spells
+}
+
+func GetSpellSummaryListAsJSON() []byte {
+	spells := GetSpellSummaryList()
+
 	spellList, err := json.Marshal(spells)
+	if err != nil {
+		panic(err)
+		//TODO: Figure out proper error checking and logging.
+	}
 
 	return spellList
 }
@@ -116,4 +131,76 @@ func (spell Spell) GetSchools() []SchoolHeader {
 func (spell Spell) GetCategories() []CategoryHeader {
 	tempSpell := SpellSummary{SpellID: spell.SpellID}
 	return tempSpell.GetCategories()
+}
+
+func GetSpellsBySchool(school_id int) []SpellSummary {
+	spells := make([]SpellSummary, 0)
+
+	sqlStatement := `SELECT spells.spell_id, spells.name, spells.summary FROM spells INNER JOIN spellschools on spells.spell_id = spellschools.spell_id WHERE spellschools.school_id=?`
+
+	rows, err := app.Config.Database.Query(sqlStatement, school_id)
+	if err != nil {
+		//TODO: Figure out proper error checking and logging.
+		panic(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		nextSpell := SpellSummary{}
+		if err := rows.Scan(&nextSpell.SpellID, &nextSpell.Name, &nextSpell.Summary); err != nil {
+			panic(err) //TODO: Figure out how to handle this properly
+		}
+		nextSpell.Schools = nextSpell.GetSchools()
+		nextSpell.Categories = nextSpell.GetCategories()
+		spells = append(spells, nextSpell)
+	}
+	return spells
+}
+
+func GetSpellsBySchoolAsJSON(school_id int) []byte {
+	spells := GetSpellsBySchool(school_id)
+
+	spellList, err := json.Marshal(spells)
+	if err != nil {
+		panic(err)
+		//TODO: Figure out proper error checking and logging.
+	}
+
+	return spellList
+}
+
+func GetSpellsByCategory(category_id int) []SpellSummary {
+	spells := make([]SpellSummary, 0)
+
+	sqlStatement := `SELECT spells.spell_id, spells.name, spells.summary FROM spells INNER JOIN spellcategories on spells.spell_id = spellcategories.spell_id WHERE spellcategories.category_id=?`
+
+	rows, err := app.Config.Database.Query(sqlStatement, category_id)
+	if err != nil {
+		//TODO: Figure out proper error checking and logging.
+		panic(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		nextSpell := SpellSummary{}
+		if err := rows.Scan(&nextSpell.SpellID, &nextSpell.Name, &nextSpell.Summary); err != nil {
+			panic(err) //TODO: Figure out how to handle this properly
+		}
+		nextSpell.Schools = nextSpell.GetSchools()
+		nextSpell.Categories = nextSpell.GetCategories()
+		spells = append(spells, nextSpell)
+	}
+	return spells
+}
+
+func GetSpellsByCategoryAsJSON(category_id int) []byte {
+	spells := GetSpellsByCategory(category_id)
+
+	spellList, err := json.Marshal(spells)
+	if err != nil {
+		panic(err)
+		//TODO: Figure out proper error checking and logging.
+	}
+
+	return spellList
 }
