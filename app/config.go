@@ -16,6 +16,9 @@ type ConfigStruct struct {
 	SiteName string
 	LogPath  string
 
+	Host string
+	Port string
+
 	DatabaseUserName string
 	DatabasePassword string
 	DatabaseName     string

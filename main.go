@@ -19,6 +19,6 @@ func main() {
 	fmt.Println("Hello World!")
 	fmt.Println("Welcome to " + app.Config.SiteName)
 
-	log.Fatal(http.ListenAndServe("localhost:8080", app.Config.Router))
+	log.Fatal(http.ListenAndServe(app.Config.Host+":"+app.Config.Port, app.Config.Router))
 
 }
