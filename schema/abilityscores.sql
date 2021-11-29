@@ -1,0 +1,1 @@
+INSERT INTO ability_scores (name) VALUES ("Intelligence"), ("Wisdom"), ("Ego"), ("Strength"), ("Agility"), ("Constitution"), ("Power"), ("Gnosis"), ("Quintessence");
