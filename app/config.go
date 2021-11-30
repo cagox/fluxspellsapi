@@ -24,6 +24,8 @@ type ConfigStruct struct {
 	DatabaseName     string
 	DatabaseOptions  string
 
+	EncKey string
+
 	//The items below are not in the JSON file.
 	Router  *mux.Router
 	Logger  *log.Logger

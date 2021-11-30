@@ -15,6 +15,7 @@ type User struct {
 	PasswordHash string `json:"password_hash"`
 	IsAdmin      bool   `json:"is_admin"`
 	IsVerified   bool   `json:"is_verified"`
+	Role         string `json:"role"`
 }
 
 type CreateUserForm struct {

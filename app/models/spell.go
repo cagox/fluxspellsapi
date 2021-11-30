@@ -20,7 +20,7 @@ type Spell struct {
 	Description    string           `json:"description"`
 	Categories     []CategoryHeader `json:"categories"`
 	Schools        []SchoolHeader   `json:"schools"`
-	DisplayScore   *AbilityScore    `json:"display_score"`
+	DisplayScore   string           `json:"display_score"`
 	/*
 	 * Categories and Schools are not persisted in the spells table in the database.
 	 * They are collected using the GetSchools and GetCategories methods below.
@@ -223,7 +223,8 @@ func GetSpellByID(spell_id int) *Spell {
 	case nil:
 		spell.Schools = spell.GetSchools()
 		spell.Categories = spell.GetCategories()
-		spell.DisplayScore = GetAbilityScoreByID(spell.AbilityScoreID)
+		displayScore := GetAbilityScoreByID(spell.AbilityScoreID)
+		spell.DisplayScore = displayScore.Name
 		return spell
 	default:
 		fmt.Println(`GetSpellByID(id int)`)
