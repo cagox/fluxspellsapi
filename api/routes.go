@@ -9,7 +9,7 @@ func SetupRoutes() {
 	app.Config.Router.HandleFunc("/", indexHandler) //This one won't technically be needed, but should be included to avoid anomalies.
 
 	//Authentication
-	//app.Config.Router.HandleFunc("/login", userLogin).Methods("POST")
+	app.Config.Router.HandleFunc("/login", userLogin).Methods("POST")
 	//app.Config.Router.HandleFunc("/logout", userLogout).Methods.("GET")
 
 	//Create things (The C in Crud)
