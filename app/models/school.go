@@ -132,3 +132,15 @@ func GetSchoolListAsJSON() []byte {
 
 	return schoolList
 }
+
+func LinkSpellSchool(spellId int64, schoolId int64) error {
+	execString := `INSERT INTO spellschools (spell_id, school_id) VALUES (?,?)`
+	_, err := app.Config.Database.Exec(execString, spellId, schoolId)
+	return err
+}
+
+func UnlinkSchool(spellId int64, schoolId int64) error {
+	execString := `DELETE FROM spellschools WHERE spell_id=? AND school_id=?`
+	_, err := app.Config.Database.Exec(execString, spellId, schoolId)
+	return err
+}

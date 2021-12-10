@@ -13,9 +13,9 @@ func SetupRoutes() {
 	//app.Config.Router.HandleFunc("/logout", userLogout).Methods.("GET")
 
 	//Create things (The C in Crud)
-	//app.Config.Router.HandleFunc("/school", createSchool).Methods("POST")
-	//app.Config.Router.HandleFunc("/category", createCategory).Methods("POST")
-	//app.Config.Router.HandleFunc("/spell", createSpell).Methods("POST")
+	//app.Config.Router.HandleFunc("/school", addSchoolHandler).Methods("POST")
+	//app.Config.Router.HandleFunc("/category", addCategoryHandler).Methods("POST")
+	app.Config.Router.HandleFunc("/spell", addSpellHandler).Methods("POST", "OPTIONS")
 
 	//View things (the R in CRUD)
 	app.Config.Router.HandleFunc("/schools", listSchools).Methods("GET")

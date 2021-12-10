@@ -9,7 +9,7 @@ import (
 )
 
 type Spell struct {
-	SpellID        int              `json:"spell_id"`
+	SpellID        int64            `json:"spell_id"`
 	Name           string           `json:"name"`
 	Cost           string           `json:"cost"`
 	Difficulty     string           `json:"difficulty"`
@@ -30,16 +30,23 @@ type Spell struct {
 }
 
 type SpellSummary struct {
-	SpellID    int              `json:"spell_id"`
+	SpellID    int64            `json:"spell_id"`
 	Name       string           `json:"name"`
 	Summary    string           `json:"summary"`
 	Categories []CategoryHeader `json:"categories"`
 	Schools    []SchoolHeader   `json:"schools"`
 }
 
+//SpellPost is used to receive a JSon struct that consists of a Spell and a Token
+type SpellPost struct {
+	BodySpell Spell  `json:"body_spell"`
+	Token     string `json:"token"`
+}
+
 func init() {
 	gob.Register(Spell{})
 	gob.Register(SpellSummary{})
+	gob.Register(SpellPost{})
 }
 
 func GetSpellSummaryList() []SpellSummary {
@@ -242,4 +249,44 @@ func GetSpellAsJSON(spell_id int) []byte {
 		panic(err) //TODO: Make this more useful
 	}
 	return spellJSON
+}
+
+func JSONtoSpell(jsonSpell []byte) (*Spell, error) {
+	spell := new(Spell)
+	if err := json.Unmarshal(jsonSpell, spell); err != nil {
+		return nil, err
+	}
+	return spell, nil
+}
+
+func (spell *Spell) ToJSON() []byte {
+	jsonUser, err := json.Marshal(spell)
+	if err != nil {
+		panic(err) //TODO: Make this more useful
+	}
+	return jsonUser
+}
+
+func InsertSpell(spell *Spell) (*Spell, error) {
+	execstring := `INSERT INTO spells (name, cost, difficulty, spellrange, prerequisites, ability_score_id, summary, description) VALUES (?,?,?,?,?,?,?,?)`
+
+	res, err := app.Config.Database.Exec(execstring, spell.Name, spell.Cost, spell.Difficulty, spell.SpellRange, spell.Prerequisites, spell.AbilityScoreID, spell.Summary, spell.Description)
+	if err != nil {
+		return nil, err
+	}
+	id, err := res.LastInsertId()
+	if err != nil {
+		return nil, err
+	}
+	spell.SpellID = id
+
+	for range spell.Schools { //TODO: FIX THIS MESS. Rewrite the ranges to use the right stuff.
+		_ = LinkSpellSchool(spell.SpellID, id)
+	}
+
+	for range spell.Categories {
+		_ = LinkSpellCategory(spell.SpellID, id)
+	}
+
+	return spell, nil
 }

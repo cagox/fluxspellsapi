@@ -3,8 +3,8 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/cagox/fluxspellsapi/app/auth"
 	"github.com/cagox/fluxspellsapi/app/database"
-	"github.com/cagox/fluxspellsapi/app/models"
 	"os"
 	"strings"
 )
@@ -29,7 +29,7 @@ func main() {
 	database.OpenDatabase()
 	defer database.CloseDatabase()
 
-	firstUser := models.CreateAndInsertUser(email, password, true, true)
+	firstUser := auth.CreateAndInsertUser(email, password, true, true)
 
 	fmt.Println("User "+firstUser.Email+" created with ID ", firstUser.User_ID)
 

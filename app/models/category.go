@@ -12,20 +12,20 @@ import (
 )
 
 type Category struct {
-	CategoryID  int    `json:"category_id"`
+	CategoryID  int64  `json:"category_id"`
 	Name        string `json:"name"`
 	Summary     string `json:"summary"`
 	Description string `json:"description"`
 }
 
 type CategorySummary struct {
-	CategoryID int    `json:"category_id"`
+	CategoryID int64  `json:"category_id"`
 	Name       string `json:"name"`
 	Summary    string `json:"summary"`
 }
 
 type CategoryHeader struct {
-	CategoryID int    `json:"category_id"`
+	CategoryID int64  `json:"category_id"`
 	Name       string `json:"name"`
 }
 
@@ -125,4 +125,16 @@ func GetCategoryAsJSON(id int) []byte {
 	}
 
 	return categoryJSON
+}
+
+func LinkSpellCategory(spellId int64, categoryId int64) error {
+	execstring := `INSERT INTO spellcategories (spell_id, category_id) VALUES (?,?)`
+	_, err := app.Config.Database.Exec(execstring, spellId, categoryId)
+	return err
+}
+
+func UnlinkCategory(spellId int64, categoryId int64) error {
+	execstring := `DELETE FROM spellcategories WHERE spell_id=? AND category_id=?`
+	_, err := app.Config.Database.Exec(execstring, spellId, categoryId)
+	return err
 }

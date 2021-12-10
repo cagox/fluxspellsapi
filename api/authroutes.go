@@ -3,7 +3,6 @@ package api
 import (
 	"encoding/json"
 	"github.com/cagox/fluxspellsapi/app/auth"
-	"github.com/cagox/fluxspellsapi/app/models"
 	"net/http"
 )
 
@@ -11,7 +10,7 @@ func userLogin(w http.ResponseWriter, r *http.Request) {
 	email := r.FormValue("email")
 	password := r.FormValue("password")
 
-	user := models.GetUserByEmail(email)
+	user := auth.GetUserByEmail(email)
 
 	validated := user.AuthenticateUser(password)
 
