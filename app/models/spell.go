@@ -280,12 +280,12 @@ func InsertSpell(spell *Spell) (*Spell, error) {
 	}
 	spell.SpellID = id
 
-	for range spell.Schools { //TODO: FIX THIS MESS. Rewrite the ranges to use the right stuff.
-		_ = LinkSpellSchool(spell.SpellID, id)
+	for _, school := range spell.Schools { //TODO: FIX THIS MESS. Rewrite the ranges to use the right stuff.
+		_ = LinkSpellSchool(spell.SpellID, school.SchoolID)
 	}
 
-	for range spell.Categories {
-		_ = LinkSpellCategory(spell.SpellID, id)
+	for _, category := range spell.Categories {
+		_ = LinkSpellCategory(spell.SpellID, category.CategoryID)
 	}
 
 	return spell, nil

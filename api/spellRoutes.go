@@ -33,21 +33,25 @@ func addSpellHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Called.")
 	var bodyPost models.SpellPost
 	err := json.NewDecoder(r.Body).Decode(&bodyPost)
-	fmt.Println(err)
-	fmt.Println(bodyPost)
-	/*
-		//Check for Authentication here.
-		spell, err := models.InsertSpell(&bodyPost.BodySpell)
-		if err != nil {
-			panic(err) //TODO: Make this more useful
-		}
-	*/
+	fmt.Println("err: ", err)
+	fmt.Println("bodyPost: ", bodyPost)
+	//TODO: Check for Authentication here.
+
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
-	//w.Write(spell.ToJSON())
-	message := `{"spell_id": 6}`
+
+	if err == nil {
+		spell, err := models.InsertSpell(&bodyPost.BodySpell)
+		if err != nil {
+			fmt.Println("err on insert: ", err) //TODO: Make this more useful
+		}
+		w.Write(spell.ToJSON())
+		return
+	}
+
+	message := `{"spell_id": 6, "message": "It didn't work."}`
 	w.Write([]byte(message))
 
 }

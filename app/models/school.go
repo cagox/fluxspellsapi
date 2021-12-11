@@ -13,7 +13,7 @@ import (
 )
 
 type School struct {
-	SchoolID    int    `json:"school_id"`
+	SchoolID    int64  `json:"school_id"`
 	Name        string `json:"name"`
 	Summary     string `json:"summary"`
 	Description string `json:"description"`
@@ -25,13 +25,13 @@ type School struct {
 }
 
 type SchoolSummary struct {
-	SchoolID int    `json:"school_id"`
+	SchoolID int64  `json:"school_id"`
 	Name     string `json:"name"`
 	Summary  string `json:"summary"`
 }
 
 type SchoolHeader struct {
-	SchoolID int    `json:"school_id"`
+	SchoolID int64  `json:"school_id"`
 	Name     string `json:"name"`
 }
 
