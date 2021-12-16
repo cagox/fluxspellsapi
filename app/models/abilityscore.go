@@ -9,7 +9,7 @@ import (
 )
 
 type AbilityScore struct {
-	AbilityScoreID int    `json:"ability_score_id"`
+	AbilityScoreID int64  `json:"ability_score_id"`
 	Name           string `json:"name"`
 }
 
@@ -17,7 +17,7 @@ func init() {
 	gob.Register(AbilityScore{})
 }
 
-func GetAbilityScoreByID(ability_score_id int) *AbilityScore {
+func GetAbilityScoreByID(ability_score_id int64) *AbilityScore {
 	ability := new(AbilityScore)
 
 	sqlStatement := `SELECT ability_score_id, name FROM ability_scores WHERE ability_score_id=?`
@@ -35,7 +35,7 @@ func GetAbilityScoreByID(ability_score_id int) *AbilityScore {
 	return ability
 }
 
-func AbilityScoreAsJSON(ability_score_id int) []byte {
+func AbilityScoreAsJSON(ability_score_id int64) []byte {
 	ability := GetAbilityScoreByID(ability_score_id)
 
 	abilityJSON, err := json.Marshal(ability)

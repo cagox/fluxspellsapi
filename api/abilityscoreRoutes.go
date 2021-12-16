@@ -21,7 +21,7 @@ func viewScore(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err) //TODO: Make this more useful.
 	}
-	ability := models.AbilityScoreAsJSON(idVal)
+	ability := models.AbilityScoreAsJSON(int64(idVal))
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write(ability)

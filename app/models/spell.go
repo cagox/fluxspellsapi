@@ -15,7 +15,7 @@ type Spell struct {
 	Difficulty     string           `json:"difficulty"`
 	SpellRange     string           `json:"spellrange"`
 	Prerequisites  string           `json:"prerequisites"`
-	AbilityScoreID int              `json:"ability_score_id"`
+	AbilityScoreID int64            `json:"ability_score_id"`
 	Summary        string           `json:"summary"`
 	Description    string           `json:"description"`
 	Categories     []CategoryHeader `json:"categories"`

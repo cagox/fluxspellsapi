@@ -28,7 +28,7 @@ func SetupRoutes() {
 	app.Config.Router.HandleFunc("/categories/{category_id}", viewCategory).Methods("GET")
 	app.Config.Router.HandleFunc("/categories/{category_id}/spells", categorySpells).Methods("GET")
 	app.Config.Router.HandleFunc("/spells/{spell_id}", viewSpell).Methods("GET")
-	app.Config.Router.HandleFunc("/abilityscores/", listScores).Methods("GET")
+	app.Config.Router.HandleFunc("/abilityscores", listScores).Methods("GET")
 	app.Config.Router.HandleFunc("/abilityscores/{ability_score_id}", viewScore).Methods("GET")
 
 	//Edit things (The U in CRUD)

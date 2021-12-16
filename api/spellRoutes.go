@@ -33,9 +33,9 @@ func addSpellHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Called.")
 	var bodyPost models.SpellPost
 	err := json.NewDecoder(r.Body).Decode(&bodyPost)
-	fmt.Println("err: ", err)
-	fmt.Println("bodyPost: ", bodyPost)
-	//TODO: Check for Authentication here.
+	//fmt.Println("err: ", err)
+	//fmt.Println("bodyPost: ", bodyPost)
+	//TODO: Check for Authentication here, or wrap handler in middleware.
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
