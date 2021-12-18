@@ -31,11 +31,8 @@ func viewSpell(w http.ResponseWriter, r *http.Request) {
 func addSpellHandler(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("Called.")
-	var bodyPost models.SpellPost
-	err := json.NewDecoder(r.Body).Decode(&bodyPost)
-	//fmt.Println("err: ", err)
-	//fmt.Println("bodyPost: ", bodyPost)
-	//TODO: Check for Authentication here, or wrap handler in middleware.
+	var bodySpell models.Spell
+	err := json.NewDecoder(r.Body).Decode(&bodySpell)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -43,7 +40,7 @@ func addSpellHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 
 	if err == nil {
-		spell, err := models.InsertSpell(&bodyPost.BodySpell)
+		spell, err := models.InsertSpell(&bodySpell)
 		if err != nil {
 			fmt.Println("err on insert: ", err) //TODO: Make this more useful
 		}

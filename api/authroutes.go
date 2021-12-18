@@ -2,9 +2,17 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/cagox/fluxspellsapi/app/auth"
 	"net/http"
 )
+
+func IfAuthenticated(next http.HandlerFunc) http.HandlerFunc {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("If you see this, it is probably working.")
+		next.ServeHTTP(w, r)
+	})
+}
 
 func userLogin(w http.ResponseWriter, r *http.Request) {
 	email := r.FormValue("email")
